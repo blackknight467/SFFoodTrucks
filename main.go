@@ -21,7 +21,7 @@ var (
 )
 
 func main() {
-	SfGov := &sfgov.SfGoveApi{
+	SfGov := &sfgov.SfGovApi{
 		MobileFoodScheduleEndpoint: MOBILE_FOOD_SCHEDULE,
 	}
 

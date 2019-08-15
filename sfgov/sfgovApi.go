@@ -1,5 +1,5 @@
 package sfgov
 
-type SfGoveApi struct {
+type SfGovApi struct {
 	MobileFoodScheduleEndpoint string
 }

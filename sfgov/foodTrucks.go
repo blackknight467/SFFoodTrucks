@@ -18,16 +18,16 @@ func (a ByName) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 func (a ByName) Less(i, j int) bool { return a[i].Applicant < a[j].Applicant }
 
 type FoodTruck struct {
-	DayOrder int `json:"dayorder,string"`
-	DayOfWeekStr string `json:"dayofweekstr"`
-	StartTime string `json:"starttime"`
-	EndTime string `json:"endtime"`
-	Start24 string `json:"start24"`
-	End24 string `json:"end24"`
-	Permit string `json:"permit"`
-	Location string `json:"location"`
+	DayOrder            int    `json:"dayorder,string"`
+	DayOfWeekStr        string `json:"dayofweekstr"`
+	StartTime           string `json:"starttime"`
+	EndTime             string `json:"endtime"`
+	Start24             string `json:"start24"`
+	End24               string `json:"end24"`
+	Permit              string `json:"permit"`
+	Location            string `json:"location"`
 	LocationDescription string `json:"locationdesc"`
-	OptionalText string `json:"optionaltext"`
+	OptionalText        string `json:"optionaltext"`
 	// Don't really need this to fulfill the requirements
 	//LocationId string `json:"locationid"`
 	//CNN string `json:"cnn"`
@@ -36,10 +36,10 @@ type FoodTruck struct {
 	//Block string `json:"block"`
 	//Lot string `json:"lot"`
 	ColdTruck util.YesNoBool `json:"coldtruck,string"`
-	Applicant string         `json:"applicant"`  // Name of the food truck
-	X float64                `json:"x,string"`
-	Y float64                `json:"y,string"`
-	Latitude float64         `json:"latitude,string"`
+	Applicant string         `json:"applicant"` // Name of the food truck
+	X         float64        `json:"x,string"`
+	Y         float64        `json:"y,string"`
+	Latitude  float64        `json:"latitude,string"`
 	Longitude float64        `json:"longitude,string"`
 	// Location 2 in json looks like a copy of Latitude and Longitude with a broken human address
 	// not going to count it for now
@@ -47,11 +47,11 @@ type FoodTruck struct {
 	// the computed regions are undocumented, not going to do anything with them for now
 }
 
-func (r *SfGoveApi) GetOpenNow() ([]FoodTruck, error) {
+func (r *SfGovApi) GetOpenNow() ([]FoodTruck, error) {
 	return r.GetOpenAtTime(time.Now())
 }
 
-func (r *SfGoveApi) GetOpenAtTime(t time.Time) ([]FoodTruck, error) {
+func (r *SfGovApi) GetOpenAtTime(t time.Time) ([]FoodTruck, error) {
 	foodTrucks, err := r.GetMobileFoodTrucksSchedule()
 	if err != nil {
 		return foodTrucks, err
@@ -77,8 +77,7 @@ func (r *SfGoveApi) GetOpenAtTime(t time.Time) ([]FoodTruck, error) {
 	return openFoodTrucks, nil
 }
 
-
-func (r *SfGoveApi) GetMobileFoodTrucksSchedule() ([]FoodTruck, error) {
+func (r *SfGovApi) GetMobileFoodTrucksSchedule() ([]FoodTruck, error) {
 	req, err := http.NewRequest("GET", r.MobileFoodScheduleEndpoint, nil)
 	if err != nil {
 		return nil, err
